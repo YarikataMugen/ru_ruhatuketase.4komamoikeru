@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DO パズルゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- メインメニュー -->
+    <div id="mainMenu" class="screen active">
+        <div class="title-container">
+            <h1 class="game-title">DO</h1>
+        </div>
+        <div class="menu-content">
+            <h2>Level</h2>
+            <select id="levelSelect" size="10">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div class="settings">
+                <label>
+                    <input type="checkbox" id="colorMode" checked>
+                    色付きタイル
+                </label>
+            </div>
+            <div class="button-container">
+                <button id="playButton" class="menu-button">Play</button>
+                <button id="rulesButton" class="menu-button">ルール</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ルール説明画面 -->
+    <div id="rulesScreen" class="screen">
+        <div class="rules-content">
+            <button id="closeRulesButton" class="menu-button">ルール説明を閉じる</button>
+            <div class="rules-text">
+                <h2>ゲームルール</h2>
+                <p>1. ダイヤモンド型のボードで数字タイルを移動させるパズルゲームです</p>
+                <p>2. タイルをクリックして選択し、隣接する空きマスに移動できます</p>
+                <p>3. 同じ数字のタイルが隣接すると固定されます（金色の枠）</p>
+                <p>4. すべてのタイルを固定するとクリアです</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="gameScreen" class="screen">
+        <canvas id="gameCanvas"></canvas>
+        <div class="game-info">
+            <span id="timer">Time: 0s</span>
+            <button id="retireButton" class="small-button">リタイア</button>
+        </div>
+    </div>
+
+    <!-- 終了画面 -->
+    <div id="endScreen" class="screen">
+        <div class="end-content">
+            <h2>クリア！</h2>
+            <p id="clearTime">Time: 0s</p>
+            <button id="backToMenuButton" class="menu-button">メニューに戻る</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
