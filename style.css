@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'MS Gothic', monospace;
+    background-color: #f0f0f0;
+}
+
+.screen {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* メインメニュー */
+.title-container {
+    background-color: black;
+    color: yellow;
+    padding: 40px 200px;
+    margin-bottom: 20px;
+}
+
+.game-title {
+    font-size: 48px;
+    margin: 0;
+    text-align: center;
+}
+
+.menu-content {
+    text-align: center;
+}
+
+#levelSelect {
+    width: 150px;
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.settings {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.settings label {
+    cursor: pointer;
+}
+
+.menu-button {
+    background-color: red;
+    color: black;
+    font-size: 24px;
+    padding: 10px 30px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background-color: darkred;
+}
+
+/* ルール画面 */
+.rules-content {
+    background-color: white;
+    padding: 40px;
+    text-align: center;
+    max-width: 600px;
+}
+
+.rules-text {
+    text-align: left;
+    line-height: 1.8;
+}
+
+/* ゲーム画面 */
+#gameScreen {
+    background-color: gray;
+}
+
+#gameCanvas {
+    background-color: white;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.game-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.small-button {
+    background-color: red;
+    color: white;
+    padding: 5px 15px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 終了画面 */
+.end-content {
+    background-color: black;
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+.end-content h2 {
+    font-size: 36px;
+}
+
+#clearTime {
+    font-size: 24px;
+    margin: 20px 0;
+}
