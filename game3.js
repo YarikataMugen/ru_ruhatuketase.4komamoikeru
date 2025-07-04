@@ -221,7 +221,13 @@ class DOGame {
     }
     getCanvasXY(event) {
         const rect = this.canvas.getBoundingClientRect();
-        return [event.clientX - rect.left, event.clientY - rect.top];
+        // canvasのCSSサイズと実際の描画サイズの比率で補正
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        return [
+            (event.clientX - rect.left) * scaleX,
+            (event.clientY - rect.top) * scaleY
+        ];
     }
     // emptyOnly: true ... 空きマスのみ, false ... 駒のみ
     // movableOnly: true ... 固定駒は選択不可(駒選択時だけtrueで呼ぶ)
