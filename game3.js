@@ -119,12 +119,14 @@ class DOGame {
             });
         this.tiles = this.ms.filter(cell => cell.value < 999);
 
-        // ★スマホ対応：画面サイズに合わせてcanvasの表示倍率を自動調整
-        const maxW = window.innerWidth;
-        const maxH = window.innerHeight;
-        let scale = Math.min(1, maxW / canvasW, maxH / canvasH);
-        this.canvas.style.width = (canvasW * scale) + 'px';
-        this.canvas.style.height = (canvasH * scale) + 'px';
+        // ★スマホ対応：最初の1回だけcanvasの表示倍率を自動調整
+        if (this.canvasScale === undefined) {
+            const maxW = window.innerWidth;
+            const maxH = window.innerHeight;
+            this.canvasScale = Math.min(1, maxW / canvasW, maxH / canvasH);
+            this.canvas.style.width = (canvasW * this.canvasScale) + 'px';
+            this.canvas.style.height = (canvasH * this.canvasScale) + 'px';
+        }
     }
     drawGrid() {
         const s = this.tileSize;
@@ -294,6 +296,7 @@ class DOGame {
         this.sumMouseRuRu = 0;
         this.mouseRuRu = [];
         this.elements.levelSelect.value = '';
+        this.canvasScale = undefined; // ★リセット時に拡大率もリセット
     }
 }
 document.addEventListener('DOMContentLoaded', () => { new DOGame(); });
