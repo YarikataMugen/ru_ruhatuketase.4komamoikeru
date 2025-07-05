@@ -109,7 +109,7 @@ body {
     
     .title-container {
         position: fixed !important;
-        top: 2px !important; /* ★さらに上に移動 */
+        top: 10px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         padding: 8px 12px !important;
@@ -117,8 +117,8 @@ body {
         backdrop-filter: blur(10px) !important;
         border-radius: 10px !important;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
-        z-index: 1000 !important; /* ★z-indexを大きくする */
-        margin: 0 !important;
+        z-index: 1000 !important;
+        margin-bottom: 0 !important;
         width: auto !important;
         max-width: 90vw !important;
     }
@@ -131,7 +131,7 @@ body {
     }
     
     .menu-content {
-        margin-top: 110px !important;
+        margin-top: 100px !important;
         position: relative !important;
         z-index: 500 !important;
     }
@@ -156,43 +156,18 @@ body {
     }
 }
 
-/* ★非常に小さい画面向け（統一） */
 @media (max-width: 480px) {
     .title-container {
-        top: 1px !important; /* ★1pxに設定 */
-        padding: 6px 8px !important;
+        top: 5px !important;
+        padding: 8px 12px !important;
     }
     
     .game-title {
         font-size: 1.8rem !important;
-        letter-spacing: 1px !important;
     }
     
     .menu-content {
-        margin-top: 90px !important;
-    }
-    
-    /* 終了画面とルール画面 */
-    #endScreen {
-        padding-top: 10px !important;
-    }
-    
-    .end-content {
-        margin-top: 10px !important;
-        padding: 40px 20px !important;
-    }
-    
-    .end-content h2 {
-        font-size: 3rem !important;
-    }
-    
-    #rulesScreen {
-        padding-top: 10px !important;
-    }
-    
-    .rules-content {
-        margin-top: 10px !important;
-        padding: 30px 20px !important;
+        margin-top: 80px !important;
     }
 }
 
