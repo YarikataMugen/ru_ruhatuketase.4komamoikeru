@@ -11,6 +11,9 @@ class DOGame {
         this.colorMode = true;
         this.heldTile = null;
         this.heldTileMousePos = null;
+        this.selectedTileValue = null; // ★追加: 選択中の値
+        this.isCleared = false; // ★クリア状態
+        this.clearButtonRect = null; // ★ボタン範囲
         this.initializeElements();
         this.setupEventListeners();
     }
@@ -150,7 +153,7 @@ class DOGame {
         this.drawGrid();
         this.tiles.forEach(tile => {
             if (this.heldTile && tile.x === this.heldTile.x && tile.y === this.heldTile.y) return;
-            this.drawDiamondTile(tile);
+            this.drawDiamondTile(tile, this.selectedTileValue !== null && tile.value === this.selectedTileValue);
         });
         if (this.heldTile) {
             this.drawDiamondTile({
@@ -158,10 +161,68 @@ class DOGame {
                 screenX: this.heldTileMousePos ? this.heldTileMousePos[0] : this.heldTile.screenX,
                 screenY: this.heldTileMousePos ? this.heldTileMousePos[1] : this.heldTile.screenY,
                 isHeld: true
-            });
+            }, true);
+        }
+        
+        // ★canvas左下に著作権表示（常に表示）
+        this.ctx.save();
+        this.ctx.font = "12px Arial";
+        this.ctx.fillStyle = "#666";
+        this.ctx.textAlign = "left";
+        this.ctx.fillText("このゲームをパクらないで", 10, this.canvas.height - 50);
+        this.ctx.fillText("作成日: 2025/7/5", 10, this.canvas.height - 35);
+        this.ctx.fillText("クリエイター: Johnnie", 10, this.canvas.height - 20);
+        this.ctx.restore();
+        
+        // ★クリア時のボタンと文字
+        if (this.isCleared) {
+            // より上に表示
+            this.ctx.save();
+            this.ctx.font = "bold 40px Arial";
+            this.ctx.fillStyle = "#40CFFF";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("ゲームクリア！", this.canvas.width / 2, 30);
+            this.ctx.restore();
+
+            // 右端と下端の中心から伸ばした交点（盤面外右下）にボタン
+            const N = this.boardSize, s = this.tileSize;
+            const margin = s, TOP_MARGIN = 60;
+            // 右端中心
+            const rightX = this.centerX + (N - 1) * s / 2;
+            const rightY = this.centerY + (N - 1) * s / 2;
+            // 下端中心
+            const bottomX = this.centerX;
+            const bottomY = this.centerY + (N - 1) * s;
+            // 交点（右端から水平、下端から垂直）
+            const btnX = rightX + 80;
+            const btnY = bottomY + 40;
+            // ボタンサイズ
+            const btnW = 160, btnH = 50;
+            // ボタン描画
+            this.ctx.save();
+            this.ctx.beginPath();
+            this.ctx.rect(btnX - btnW / 2, btnY - btnH / 2, btnW, btnH);
+            this.ctx.fillStyle = "#40CFFF";
+            this.ctx.shadowColor = "#40CFFF";
+            this.ctx.shadowBlur = 10;
+            this.ctx.fill();
+            this.ctx.lineWidth = 3;
+            this.ctx.strokeStyle = "#0077AA";
+            this.ctx.stroke();
+            this.ctx.font = "bold 28px Arial";
+            this.ctx.fillStyle = "#fff";
+            this.ctx.textAlign = "center";
+            this.ctx.textBaseline = "middle";
+            this.ctx.fillText("次へ", btnX, btnY);
+            this.ctx.restore();
+            // ボタン範囲保存
+            this.clearButtonRect = { x: btnX - btnW / 2, y: btnY - btnH / 2, w: btnW, h: btnH };
+        } else {
+            this.clearButtonRect = null;
         }
     }
-    drawDiamondTile(tile) {
+    // highlight: trueなら水色で光らせる
+    drawDiamondTile(tile, highlight = false) {
         const s = this.tileSize * 0.8, cx = tile.screenX, cy = tile.screenY;
         const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#E95D72', '#66B933', '#A575F5', '#FF9D32'];
         this.ctx.save();
@@ -174,6 +235,16 @@ class DOGame {
         this.ctx.fillStyle = this.colorMode ? colors[(tile.value - 1) % colors.length] : '#E0E0E0';
         this.ctx.globalAlpha = tile.isHeld ? 0.7 : 1;
         this.ctx.fill(); this.ctx.globalAlpha = 1;
+        // ★水色ハイライト
+        if (highlight) {
+            this.ctx.save();
+            this.ctx.strokeStyle = "#40CFFF";
+            this.ctx.lineWidth = 6;
+            this.ctx.shadowColor = "#40CFFF";
+            this.ctx.shadowBlur = 15;
+            this.ctx.stroke();
+            this.ctx.restore();
+        }
         if (this.mouseRuRu[tile.y][tile.x] === 1) { this.ctx.strokeStyle = '#FFD700'; this.ctx.lineWidth = 3; }
         else if (tile.isHeld) { this.ctx.strokeStyle = '#FF3333'; this.ctx.lineWidth = 4; }
         else { this.ctx.strokeStyle = '#333'; this.ctx.lineWidth = 2; }
@@ -186,11 +257,26 @@ class DOGame {
     }
     onCanvasClick(event) {
         const [cx, cy] = this.getCanvasXY(event);
+        // ★クリア時はボタン判定
+        if (this.isCleared && this.clearButtonRect) {
+            const r = this.clearButtonRect;
+            if (cx >= r.x && cx <= r.x + r.w && cy >= r.y && cy <= r.y + r.h) {
+                // ボタン押下時
+                this.isCleared = false;
+                this.clearButtonRect = null;
+                this.endGame(); // 既存の終了画面へ
+                return;
+            }
+        }
         if (!this.heldTile) {
-            const tile = this.getTileAt(cx, cy, false, true); // ← 修正! 固定された駒は対象外
+            const tile = this.getTileAt(cx, cy, false, true);
             if (tile) {
                 this.heldTile = { ...tile };
                 this.heldTileMousePos = [cx, cy];
+                this.selectedTileValue = tile.value;
+                this.drawGame();
+            } else {
+                this.selectedTileValue = null;
                 this.drawGame();
             }
         } else {
@@ -206,18 +292,33 @@ class DOGame {
                     this.updateMouseRuRuAfterMove(emptyTile.x, emptyTile.y);
                     this.updateMouseRuRuAfterMove(sx, sy);
                     this.setupCanvas();
-                    if (this.checkWin()) this.endGame();
+                    if (this.checkWin()) {
+                        this.isCleared = true;
+                        // ★クリア時にタイマーを止めて時間を記録
+                        this.stopTimer();
+                        const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
+                        this.clearTimeSeconds = elapsed; // ★クリア時間を保存
+                        // ★クリア時に持っている駒をリセット
+                        this.heldTile = null;
+                        this.heldTileMousePos = null;
+                        this.selectedTileValue = null;
+                        this.drawGame();
+                        return;
+                    }
                 }
             }
             this.heldTile = null;
             this.heldTileMousePos = null;
+            this.selectedTileValue = null;
             this.drawGame();
         }
     }
     onMouseMove(event) {
+        // ★クリア時は駒の追従を無効化
+        if (this.isCleared) return;
+        
         if (this.heldTile) {
-            const [cx, cy] = this.getCanvasXY(event);
-            this.heldTileMousePos = [cx, cy];
+            this.heldTileMousePos = this.getCanvasXY(event);
             this.drawGame();
         }
     }
@@ -281,10 +382,11 @@ class DOGame {
     }
     stopTimer() { if (this.timerInterval) clearInterval(this.timerInterval); }
     endGame() {
-        this.stopTimer();
-        const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
-        this.elements.clearTime.textContent = `Time: ${elapsed}s`;
-        setTimeout(() => { this.showScreen('end'); }, 500);
+        // ★クリア時間が保存されていれば表示
+        if (this.clearTimeSeconds !== undefined) {
+            this.elements.clearTime.textContent = `Time: ${this.clearTimeSeconds}s`;
+        }
+        this.showScreen('end');
     }
     resetGame() {
         this.stopTimer();
@@ -296,7 +398,10 @@ class DOGame {
         this.sumMouseRuRu = 0;
         this.mouseRuRu = [];
         this.elements.levelSelect.value = '';
-        this.canvasScale = undefined; // ★リセット時に拡大率もリセット
+        this.canvasScale = undefined;
+        this.isCleared = false;
+        this.clearButtonRect = null;
+        this.clearTimeSeconds = undefined; // ★クリア時間もリセット
     }
 }
 document.addEventListener('DOMContentLoaded', () => { new DOGame(); });
