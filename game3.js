@@ -57,6 +57,11 @@ class DOGame {
     showScreen(screenName) {
         Object.values(this.screens).forEach(screen => screen.classList.remove('active'));
         this.screens[screenName].classList.add('active');
+        
+        // ★ゲーム画面以外に切り替わったときは念のためcanvasをクリア
+        if (screenName !== 'game' && this.canvas && this.ctx) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
     }
     showMainMenu() { this.showScreen('mainMenu'); this.resetGame(); }
     showRules() { this.showScreen('rules'); }
@@ -401,7 +406,15 @@ class DOGame {
         this.canvasScale = undefined;
         this.isCleared = false;
         this.clearButtonRect = null;
-        this.clearTimeSeconds = undefined; // ★クリア時間もリセット
+        this.clearTimeSeconds = undefined;
+        
+        // ★canvasをクリア
+        if (this.canvas && this.ctx) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+        
+        // ★タイマーもリセット
+        this.elements.timer.textContent = 'Time: 0s';
     }
 }
 document.addEventListener('DOMContentLoaded', () => { new DOGame(); });
