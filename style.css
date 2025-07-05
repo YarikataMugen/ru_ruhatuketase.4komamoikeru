@@ -109,10 +109,10 @@ body {
     
     .title-container {
         position: fixed !important;
-        top: 10px !important;
+        top: 2px !important; /* ★10pxから2pxに変更 */
         left: 50% !important;
         transform: translateX(-50%) !important;
-        padding: 8px 12px !important;
+        padding: 6px 10px !important; /* ★パディングを小さくしてコンパクトに */
         background: rgba(0, 0, 0, 0.3) !important;
         backdrop-filter: blur(10px) !important;
         border-radius: 10px !important;
@@ -124,14 +124,14 @@ body {
     }
     
     .game-title {
-        font-size: 2.2rem !important;
-        letter-spacing: 2px !important;
+        font-size: 2rem !important; /* ★2.2remから2remに変更 */
+        letter-spacing: 1px !important; /* ★2pxから1pxに変更 */
         text-align: center !important;
         margin: 0 !important;
     }
     
     .menu-content {
-        margin-top: 100px !important;
+        margin-top: 90px !important; /* ★100pxから90pxに変更 */
         position: relative !important;
         z-index: 500 !important;
     }
@@ -158,16 +158,17 @@ body {
 
 @media (max-width: 480px) {
     .title-container {
-        top: 5px !important;
-        padding: 8px 12px !important;
+        top: 1px !important; /* ★5pxから1pxに変更 */
+        padding: 5px 8px !important; /* ★さらに小さくしてコンパクトに */
     }
     
     .game-title {
-        font-size: 1.8rem !important;
+        font-size: 1.6rem !important; /* ★1.8remから1.6remに変更 */
+        letter-spacing: 0.5px !important; /* ★さらに詰める */
     }
     
     .menu-content {
-        margin-top: 80px !important;
+        margin-top: 70px !important; /* ★80pxから70pxに変更 */
     }
 }
 
