@@ -92,12 +92,12 @@ body {
 @media (max-width: 768px) {
     /* メインメニューをさらに上に */
     #mainMenu {
-        padding-top: 2vh; /* ★タイトルをさらに上に移動 */
+        padding-top: 1vh; /* ★タイトルをさらに上に移動 */
         justify-content: flex-start; /* ★上寄せ */
     }
     
     .title-container {
-        margin-top: 5px; /* ★タイトルの余白を調整 */
+        margin-top: 2px; /* ★タイトルの余白を調整 */
         padding: 20px 15px;
     }
     
@@ -115,11 +115,11 @@ body {
 @media (max-width: 480px) {
     /* メインメニューをさらに上に */
     #mainMenu {
-        padding-top: 2vh; /* ★タイトルをさらに上に移動 */
+        padding-top: 1vh; /* ★タイトルをさらに上に移動 */
     }
     
     .title-container {
-        margin-top: 3px; /* ★タイトルの余白をさらに調整 */
+        margin-top: 2px; /* ★タイトルの余白をさらに調整 */
         padding: 15px 10px;
     }
     
