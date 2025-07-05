@@ -1,6 +1,6 @@
 class DOGame {
     constructor() {
-        this.selectedLevel = 1; // ★デフォルトレベル1
+        this.selectedLevel = 3; // ★デフォルトレベル3（1+2）
         this.mapData = [];
         this.mouseRuRu = [];
         this.boardSize = 0;
@@ -50,10 +50,16 @@ class DOGame {
         });
         this.elements.colorMode.addEventListener('change', (e) => {
             this.colorMode = e.target.checked;
-            this.drawGame();
+            if (this.screens.game.classList.contains('active')) {
+                this.drawGame();
+            }
         });
         this.canvas.addEventListener('click', (e) => this.onCanvasClick(e));
         this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
+        
+        // ★初期化時にレベル選択を反映
+        this.elements.levelSelect.value = "0"; // デフォルト選択
+        this.selectedLevel = 3; // 内部値も設定
     }
     showScreen(screenName) {
         Object.values(this.screens).forEach(screen => screen.classList.remove('active'));
@@ -71,7 +77,7 @@ class DOGame {
     showRules() { this.showScreen('rules'); }
 
     startGame() {
-        if (this.selectedLevel === 0) {
+        if (this.selectedLevel === 0 || this.selectedLevel < 3) {
             alert('レベルを選択してください');
             return;
         }
@@ -180,7 +186,7 @@ class DOGame {
         this.ctx.textAlign = "left";
         this.ctx.fillText("このゲームをパクらないで", 10, this.canvas.height - 50);
         this.ctx.fillText("作成日: 2025/7/5", 10, this.canvas.height - 35);
-        this.ctx.fillText("クリエイター: Johnnie", 10, this.canvas.height - 20);
+        this.ctx.fillText("クリエイター: Yaminion", 10, this.canvas.height - 20);
         this.ctx.restore();
         
         // ★クリア時のボタンと文字
