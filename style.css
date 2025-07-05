@@ -95,7 +95,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* ★スマホ向けの調整（統一） */
+/* ★スマホ向けの調整 */
 @media (max-width: 768px) {
     .screen.active {
         justify-content: flex-start !important;
@@ -109,10 +109,10 @@ body {
     
     .title-container {
         position: fixed !important;
-        top: 2px !important; /* ★10pxから2pxに変更 */
+        top: 10px !important; /* ★タイトルを画面上部から10pxに配置（約1cm） */
         left: 50% !important;
         transform: translateX(-50%) !important;
-        padding: 6px 10px !important; /* ★パディングを小さくしてコンパクトに */
+        padding: 6px 10px !important; /* ★パディングを調整 */
         background: rgba(0, 0, 0, 0.3) !important;
         backdrop-filter: blur(10px) !important;
         border-radius: 10px !important;
@@ -131,7 +131,7 @@ body {
     }
     
     .menu-content {
-        margin-top: 90px !important; /* ★100pxから90pxに変更 */
+        margin-top: 100px !important; /* ★タイトルの下に余白を追加 */
         position: relative !important;
         z-index: 500 !important;
     }
@@ -158,17 +158,16 @@ body {
 
 @media (max-width: 480px) {
     .title-container {
-        top: 1px !important; /* ★5pxから1pxに変更 */
-        padding: 5px 8px !important; /* ★さらに小さくしてコンパクトに */
+        top: 5px !important; /* ★さらに小さい画面では5pxに配置 */
+        padding: 5px 8px !important; /* ★パディングをさらに縮小 */
     }
-    
+
     .game-title {
-        font-size: 1.6rem !important; /* ★1.8remから1.6remに変更 */
-        letter-spacing: 0.5px !important; /* ★さらに詰める */
+        font-size: 1.8rem !important; /* ★フォントサイズを調整 */
     }
-    
+
     .menu-content {
-        margin-top: 70px !important; /* ★80pxから70pxに変更 */
+        margin-top: 80px !important; /* ★タイトルの下に余白を追加 */
     }
 }
 
