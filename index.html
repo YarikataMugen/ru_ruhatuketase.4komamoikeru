@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ソロエル&ツム パズルゲーム</title> <!-- ★変更 -->
+    <title>ソロエル&ツム パズルゲーム</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -36,7 +36,6 @@
                 <button id="playButton" class="menu-button">プレイ</button>
                 <button id="rulesButton" class="menu-button">ルール</button>
             </div>
-            <!-- ★著作権表示をボタンの近くに移動 -->
             <div class="copyright-notice">
                 <p>このゲームをパクらないで</p>
                 <p>作成日: 2025/7/5</p>
@@ -45,41 +44,40 @@
         </div>
     </div>
 
-    <!-- ルール説明画面 -->
+    <!-- ルール画面 -->
     <div id="rulesScreen" class="screen">
         <div class="rules-content">
-            <button id="closeRulesButton" class="menu-button">ルール説明を閉じる</button>
             <div class="rules-text">
                 <h2>ゲームルール</h2>
-                <p>1. ダイヤモンド型のボードで数字タイルを移動させるパズルゲームです</p>
-                <p>2. タイルをクリックして選択し、隣接する空きマスに移動できます</p>
-                <p>3. 同じ数字のタイルが隣接すると固定されます（金色の枠）</p>
-                <p>4. すべてのタイルを固定するとクリアです</p>
+                <p>同じ数字のタイルを隣接させてクリアを目指そう！</p>
+                <p>タイルは上下左右の隣接する空きマスにのみ移動できます。</p>
+                <p>同じ数字のタイルが隣り合うと光ります。</p>
+                <p>すべてのタイルを光らせるとクリアです！</p>
             </div>
+            <button id="closeRulesButton" class="menu-button">戻る</button>
         </div>
     </div>
 
     <!-- ゲーム画面 -->
     <div id="gameScreen" class="screen">
         <div class="game-info">
-            <span id="timer">Time: 0s</span>
-            <button id="retireButton" class="small-button">リタイア</button>
+            <div id="timer">Time: 0s</div>
+            <button id="retireButton" class="small-button">リタイヤ</button>
         </div>
         <canvas id="gameCanvas"></canvas>
-        <!-- ★ゲーム画面用著作権表示 -->
-        <div class="game-copyright">
-            <p>このゲームをパクらないで</p>
-            <p>作成日: 2025/7/5</p>
-            <p>クリエイター: Yaminion</p>
-        </div>
     </div>
 
     <!-- 終了画面 -->
     <div id="endScreen" class="screen">
         <div class="end-content">
-            <h2>クリア！</h2>
-            <p id="levelClearInfo">Level 1 クリア！</p> <!-- ★レベル情報追加 -->
-            <p id="clearTime">Time: 0s</p>
+            <h2>おめでとう！</h2>
+            <div id="levelClearInfo">Level 1 クリア！</div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-value" id="clearTime">Time: 0s</span>
+                    <span class="stat-label">クリア時間</span>
+                </div>
+            </div>
             <button id="backToMenuButton" class="menu-button">メニューに戻る</button>
         </div>
     </div>
