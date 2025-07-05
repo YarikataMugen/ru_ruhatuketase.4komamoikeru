@@ -1,6 +1,6 @@
 class DOGame {
     constructor() {
-        this.selectedLevel = 0;
+        this.selectedLevel = 1; // ★デフォルトレベル1
         this.mapData = [];
         this.mouseRuRu = [];
         this.boardSize = 0;
@@ -33,6 +33,7 @@ class DOGame {
             backToMenuButton: document.getElementById('backToMenuButton'),
             timer: document.getElementById('timer'),
             clearTime: document.getElementById('clearTime'),
+            levelClearInfo: document.getElementById('levelClearInfo'), // ★追加
             colorMode: document.getElementById('colorMode')
         };
         this.canvas = document.getElementById('gameCanvas');
@@ -45,7 +46,7 @@ class DOGame {
         this.elements.retireButton.addEventListener('click', () => this.showMainMenu());
         this.elements.backToMenuButton.addEventListener('click', () => this.showMainMenu());
         this.elements.levelSelect.addEventListener('change', (e) => {
-            this.selectedLevel = parseInt(e.target.value) + 2;
+            this.selectedLevel = parseInt(e.target.value) + 3; // ★レベル3から開始
         });
         this.elements.colorMode.addEventListener('change', (e) => {
             this.colorMode = e.target.checked;
@@ -63,7 +64,10 @@ class DOGame {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }
     }
-    showMainMenu() { this.showScreen('mainMenu'); this.resetGame(); }
+    showMainMenu() { 
+        this.showScreen('mainMenu'); 
+        this.resetGame(); 
+    }
     showRules() { this.showScreen('rules'); }
 
     startGame() {
@@ -391,18 +395,29 @@ class DOGame {
         if (this.clearTimeSeconds !== undefined) {
             this.elements.clearTime.textContent = `Time: ${this.clearTimeSeconds}s`;
         }
+        
+        // ★レベル情報を表示
+        const currentLevel = this.selectedLevel - 2; // 表示用に-2
+        this.elements.levelClearInfo.textContent = `Level ${currentLevel} クリア！`;
+        
+        // ★次のレベルを自動選択（最大10まで）
+        if (currentLevel < 10) {
+            const nextLevelIndex = currentLevel; // selectのvalue値
+            this.elements.levelSelect.value = nextLevelIndex.toString();
+            this.selectedLevel = nextLevelIndex + 3; // 内部値を更新
+        }
+        
         this.showScreen('end');
     }
     resetGame() {
         this.stopTimer();
-        this.selectedLevel = 0;
+        // ★selectedLevelはリセットしない（レベル選択を保持）
         this.mapData = [];
         this.tiles = [];
         this.heldTile = null;
         this.heldTileMousePos = null;
         this.sumMouseRuRu = 0;
         this.mouseRuRu = [];
-        this.elements.levelSelect.value = '';
         this.canvasScale = undefined;
         this.isCleared = false;
         this.clearButtonRect = null;
