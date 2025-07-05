@@ -115,7 +115,7 @@ body {
 @media (max-width: 480px) {
     /* メインメニューをさらに上に */
     #mainMenu {
-        padding-top: 3vh; /* ★タイトルをさらに上に移動 */
+        padding-top: 2vh; /* ★タイトルをさらに上に移動 */
     }
     
     .title-container {
