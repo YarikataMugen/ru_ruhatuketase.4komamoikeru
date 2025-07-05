@@ -92,7 +92,7 @@ body {
 @media (max-width: 768px) {
     /* メインメニューをさらに上に */
     #mainMenu {
-        padding-top: 5vh; /* ★タイトルをさらに上に移動 */
+        padding-top: 2vh; /* ★タイトルをさらに上に移動 */
         justify-content: flex-start; /* ★上寄せ */
     }
     
