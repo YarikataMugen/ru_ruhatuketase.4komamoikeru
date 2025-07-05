@@ -92,31 +92,104 @@ body {
 @media (max-width: 768px) {
     /* メインメニュー */
     #mainMenu {
-        padding-top: 0; /* ★余白を完全に削除 */
-        justify-content: flex-start; /* ★上寄せ */
-        position: relative; /* ★タイトルの絶対位置を設定するため */
+        padding: 0 !important; /* ★強制的に余白を削除 */
+        justify-content: flex-start !important; /* ★強制的に上寄せ */
+        align-items: stretch !important; /* ★縦方向の配置を調整 */
     }
     
     .title-container {
-        position: absolute; /* ★絶対位置に変更 */
-        top: 0; /* ★画面上部に配置 */
-        left: 50%; /* ★中央揃え */
-        transform: translateX(-50%); /* ★中央揃えを正確にする */
-        padding: 10px 15px; /* ★余白を調整 */
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        position: fixed !important; /* ★絶対位置から固定位置に変更 */
+        top: 10px !important; /* ★画面上部から10pxに強制配置 */
+        left: 50% !important; /* ★中央揃え */
+        transform: translateX(-50%) !important; /* ★中央揃えを正確にする */
+        padding: 10px 15px !important; /* ★余白を調整 */
+        background: rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+        z-index: 100 !important; /* ★最前面に表示 */
+        margin: 0 !important; /* ★マージンを完全に削除 */
+        width: auto !important;
+        max-width: 90vw !important;
     }
     
     .game-title {
-        font-size: 2.4rem; /* ★少し大きくして目立たせる */
-        letter-spacing: 3px;
-        text-align: center;
+        font-size: 2.4rem !important; /* ★少し大きくして目立たせる */
+        letter-spacing: 3px !important;
+        text-align: center !important;
+        margin: 0 !important; /* ★マージンを完全に削除 */
     }
     
     .menu-content {
-        margin-top: 100px; /* ★タイトルの下に余白を追加 */
+        margin-top: 120px !important; /* ★タイトルの下に大きな余白を追加 */
+        position: relative !important;
+        z-index: 50 !important;
+    }
+}
+
+/* 非常に小さい画面向け */
+@media (max-width: 480px) {
+    #mainMenu {
+        padding: 0 !important; /* ★強制的に余白を削除 */
+    }
+    
+    .title-container {
+        top: 5px !important; /* ★さらに上に配置 */
+        padding: 8px 10px !important; /* ★余白を調整 */
+    }
+    
+    .game-title {
+        font-size: 2rem !important; /* ★小さい画面向けに調整 */
+        letter-spacing: 2px !important;
+    }
+    
+    .menu-content {
+        margin-top: 100px !important; /* ★タイトルの下に余白を追加 */
+    }
+}
+
+/* 終了画面とルール画面もスマホで上寄せ */
+@media (max-width: 768px) {
+    #endScreen {
+        padding-top: 20px !important; /* ★上に移動 */
+        justify-content: flex-start !important; /* ★上寄せ */
+    }
+    
+    .end-content {
+        margin-top: 20px !important; /* ★さらに上に */
+    }
+    
+    #rulesScreen {
+        padding-top: 20px !important; /* ★上に移動 */
+        justify-content: flex-start !important; /* ★上寄せ */
+    }
+    
+    .rules-content {
+        margin-top: 20px !important; /* ★さらに上に */
+    }
+}
+
+@media (max-width: 480px) {
+    #endScreen {
+        padding-top: 10px !important; /* ★さらに上に */
+    }
+    
+    .end-content {
+        margin-top: 10px !important; /* ★さらに上に */
+        padding: 40px 20px !important; /* ★パディング調整 */
+    }
+    
+    .end-content h2 {
+        font-size: 3rem !important; /* ★少し小さく */
+    }
+    
+    #rulesScreen {
+        padding-top: 10px !important; /* ★さらに上に */
+    }
+    
+    .rules-content {
+        margin-top: 10px !important; /* ★さらに上に */
+        padding: 30px 20px !important; /* ★パディング調整 */
     }
 }
 
