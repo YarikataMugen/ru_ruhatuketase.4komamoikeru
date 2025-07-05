@@ -125,3 +125,28 @@ body {
     font-size: 24px;
     margin: 20px 0;
 }
+
+/* 著作権表示 */
+.copyright-notice {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.copyright-notice p {
+    margin: 2px 0;
+}
+
+/* ゲーム画面用の著作権表示 */
+.game-copyright {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.4;
+    z-index: 10;
+}
