@@ -265,4 +265,449 @@ body {
     overflow: hidden;
 }
 
-/* ...existing code... */
+@keyframes glow {
+    from { 
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(64, 207, 255, 0.3), 0 0 30px rgba(64, 207, 255, 0.2);
+    }
+    to { 
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(64, 207, 255, 0.6), 0 0 40px rgba(64, 207, 255, 0.4);
+    }
+}
+
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* メニューコンテンツ */
+.menu-content {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 30px 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    width: 90%;
+}
+
+.menu-content h2 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* レベル選択 */
+#levelSelect {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+}
+
+#levelSelect:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(64, 207, 255, 0.5);
+    box-shadow: 0 0 15px rgba(64, 207, 255, 0.3);
+}
+
+#levelSelect:focus {
+    outline: none;
+    border-color: #40CFFF;
+    box-shadow: 0 0 20px rgba(64, 207, 255, 0.5);
+}
+
+#levelSelect option {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+}
+
+#levelSelect option:hover {
+    background: rgba(64, 207, 255, 0.3);
+}
+
+/* 設定 */
+.settings {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.settings label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.settings label:hover {
+    color: #40CFFF;
+}
+
+.settings input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    accent-color: #40CFFF;
+    cursor: pointer;
+}
+
+/* ボタンコンテナ */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* メニューボタン */
+.menu-button {
+    background: linear-gradient(135deg, #40CFFF, #5555FF);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(64, 207, 255, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.menu-button:hover::before {
+    left: 100%;
+}
+
+.menu-button:hover {
+    background: linear-gradient(135deg, #5555FF, #40CFFF);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(64, 207, 255, 0.6);
+}
+
+.menu-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(64, 207, 255, 0.4);
+}
+
+/* 著作権表示 */
+.copyright-notice {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.copyright-notice p {
+    margin: 2px 0;
+}
+
+/* ルール画面 */
+.rules-content {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: 90%;
+}
+
+.rules-content h2 {
+    color: #40CFFF;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(64, 207, 255, 0.5);
+}
+
+.rules-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 15px 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ゲーム画面 */
+#gameScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    position: relative;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+    min-height: 100vh;
+}
+
+#gameScreen.active {
+    display: flex;
+}
+
+.game-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(52, 73, 94, 0.8));
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 4px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 400px;
+}
+
+#timer {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+        0 4px 15px rgba(52, 152, 219, 0.3),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#timer::before {
+    content: '⏰';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    animation: tick 1s infinite;
+}
+
+@keyframes tick {
+    0%, 50% { transform: translateY(-50%) scale(1); }
+    25% { transform: translateY(-50%) scale(1.1); }
+}
+
+.small-button {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 
+        0 4px 15px rgba(231, 76, 60, 0.3),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.small-button::before {
+    content: '🚪';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.small-button:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 20px rgba(231, 76, 60, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+.small-button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 8px rgba(231, 76, 60, 0.3),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+#gameCanvas {
+    border: 4px solid #34495e;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 50%, #bdc3c7 100%);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.2),
+        inset 0 2px 8px rgba(255, 255, 255, 0.6),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+#gameCanvas::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+/* 終了画面 */
+#endScreen {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#endScreen::before {
+    content: '🎉';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 5rem;
+    animation: confetti1 3s infinite ease-in-out;
+}
+
+#endScreen::after {
+    content: '🎊';
+    position: absolute;
+    top: 20%;
+    right: 15%;
+    font-size: 4rem;
+    animation: confetti2 2.5s infinite ease-in-out;
+}
+
+@keyframes confetti1 {
+    0%, 100% { transform: rotate(0deg) translateY(0px); }
+    50% { transform: rotate(180deg) translateY(-20px); }
+}
+
+@keyframes confetti2 {
+    0%, 100% { transform: rotate(0deg) translateY(0px); }
+    50% { transform: rotate(-180deg) translateY(-15px); }
+}
+
+.end-content {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    color: #fff;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    z-index: 10;
+}
+
+.end-content h2 {
+    color: #40CFFF;
+    font-size: 4rem;
+    margin-bottom: 30px;
+    text-shadow: 
+        0 0 20px rgba(64, 207, 255, 0.5),
+        0 0 40px rgba(64, 207, 255, 0.3);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+#levelClearInfo {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: #FFD700;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+#clearTime {
+    font-size: 1.8rem;
+    margin: 25px 0;
+    color: #40CFFF;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(64, 207, 255, 0.5);
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #40CFFF;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+}
