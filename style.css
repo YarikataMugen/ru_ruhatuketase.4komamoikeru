@@ -105,6 +105,8 @@ body {
         padding: 0 !important;
         justify-content: flex-start !important;
         align-items: stretch !important;
+        transform: scale(0.75); /* ★表示倍率を75%に設定 */
+        transform-origin: top center; /* ★倍率の基準点を画面上部中央に設定 */
     }
     
     .title-container {
