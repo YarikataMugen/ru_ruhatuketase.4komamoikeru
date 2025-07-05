@@ -99,7 +99,7 @@ body {
     
     .title-container {
         position: absolute; /* ★絶対位置に変更 */
-        top: 10px; /* ★画面上部から10pxに配置 */
+        top: 0; /* ★画面上部に配置 */
         left: 50%; /* ★中央揃え */
         transform: translateX(-50%); /* ★中央揃えを正確にする */
         padding: 10px 15px; /* ★余白を調整 */
@@ -116,14 +116,14 @@ body {
     }
     
     .menu-content {
-        margin-top: 80px; /* ★タイトルの下に余白を追加 */
+        margin-top: 100px; /* ★タイトルの下に余白を追加 */
     }
 }
 
 /* 非常に小さい画面向け */
 @media (max-width: 480px) {
     .title-container {
-        top: 5px; /* ★さらに上に配置 */
+        top: 0; /* ★さらに上に配置 */
         padding: 8px 10px; /* ★余白を調整 */
     }
     
@@ -133,7 +133,7 @@ body {
     }
     
     .menu-content {
-        margin-top: 60px; /* ★タイトルの下に余白を追加 */
+        margin-top: 80px; /* ★タイトルの下に余白を追加 */
     }
 }
 
