@@ -99,10 +99,10 @@ body {
     
     .title-container {
         position: fixed !important; /* ★絶対位置から固定位置に変更 */
-        top: 10px !important; /* ★画面上部から10pxに強制配置 */
+        top: 5px !important; /* ★画面上部から5pxに変更（約1cm相当） */
         left: 50% !important; /* ★中央揃え */
         transform: translateX(-50%) !important; /* ★中央揃えを正確にする */
-        padding: 10px 15px !important; /* ★余白を調整 */
+        padding: 8px 12px !important; /* ★余白を少し縮小 */
         background: rgba(0, 0, 0, 0.3) !important;
         backdrop-filter: blur(10px) !important;
         border-radius: 10px !important;
@@ -114,14 +114,14 @@ body {
     }
     
     .game-title {
-        font-size: 2.4rem !important; /* ★少し大きくして目立たせる */
-        letter-spacing: 3px !important;
+        font-size: 2.2rem !important; /* ★少し小さくして上に詰める */
+        letter-spacing: 2px !important;
         text-align: center !important;
         margin: 0 !important; /* ★マージンを完全に削除 */
     }
     
     .menu-content {
-        margin-top: 120px !important; /* ★タイトルの下に大きな余白を追加 */
+        margin-top: 110px !important; /* ★タイトルの下に適切な余白を追加 */
         position: relative !important;
         z-index: 50 !important;
     }
@@ -134,17 +134,17 @@ body {
     }
     
     .title-container {
-        top: 5px !important; /* ★さらに上に配置 */
-        padding: 8px 10px !important; /* ★余白を調整 */
+        top: 3px !important; /* ★さらに上に配置（約0.8cm相当） */
+        padding: 6px 8px !important; /* ★余白をさらに縮小 */
     }
     
     .game-title {
-        font-size: 2rem !important; /* ★小さい画面向けに調整 */
-        letter-spacing: 2px !important;
+        font-size: 1.8rem !important; /* ★小さい画面向けに調整 */
+        letter-spacing: 1px !important;
     }
     
     .menu-content {
-        margin-top: 100px !important; /* ★タイトルの下に余白を追加 */
+        margin-top: 90px !important; /* ★タイトルの下に余白を追加 */
     }
 }
 
