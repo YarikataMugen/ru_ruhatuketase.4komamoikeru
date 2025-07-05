@@ -17,7 +17,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* ★デスクトップは中央のまま */
+}
+
+/* スマホでのみ上寄せ */
+@media (max-width: 768px) {
+    .screen.active {
+        justify-content: flex-start; /* ★スマホは上寄せ */
+    }
 }
 
 /* メインメニュー */
@@ -85,15 +92,16 @@ body {
 
 /* スマホ向けの調整 */
 @media (max-width: 768px) {
+    /* メインメニューを上に */
     #mainMenu {
-        padding-top: 5vh; /* ★スマホでタイトルを上に */
+        padding-top: 8vh; /* ★上に移動 */
         justify-content: flex-start; /* ★上寄せ */
     }
     
     .title-container {
         padding: 20px 15px;
         margin-bottom: 20px;
-        margin-top: 20px; /* ★スマホで上に移動 */
+        margin-top: 10px; /* ★さらに上に */
     }
     
     .game-title {
@@ -102,23 +110,117 @@ body {
     }
     
     .menu-content {
-        margin-top: 10px;
+        margin-top: 5px; /* ★メニューも上に */
+    }
+    
+    /* 終了画面も上に */
+    #endScreen {
+        padding-top: 8vh; /* ★上に移動 */
+        justify-content: flex-start; /* ★上寄せ */
+    }
+    
+    .end-content {
+        margin-top: 10px; /* ★さらに上に */
+    }
+    
+    /* ルール画面も上に */
+    #rulesScreen {
+        padding-top: 8vh; /* ★上に移動 */
+        justify-content: flex-start; /* ★上寄せ */
+    }
+    
+    .rules-content {
+        margin-top: 10px; /* ★さらに上に */
+    }
+    
+    .game-info {
+        min-width: auto;
+        width: 90%;
+        gap: 20px;
+        padding: 15px 20px;
+    }
+    
+    #timer {
+        font-size: 16px;
+        padding: 10px 20px;
+        min-width: 100px;
+    }
+    
+    #timer::before {
+        font-size: 14px;
+        left: 6px;
+    }
+    
+    .small-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    
+    .small-button::before {
+        font-size: 14px;
+        left: 6px;
+    }
+    
+    #gameCanvas {
+        border-width: 3px;
+        border-radius: 15px;
     }
 }
 
 /* 非常に小さい画面向け */
 @media (max-width: 480px) {
+    /* さらに上に */
     #mainMenu {
-        padding-top: 3vh; /* ★さらに上に */
+        padding-top: 5vh; /* ★さらに上に */
     }
     
     .title-container {
-        margin-top: 10px; /* ★さらに上に */
+        margin-top: 5px; /* ★さらに上に */
     }
     
     .game-title {
         font-size: 1.8rem;
         letter-spacing: 2px;
+    }
+    
+    /* 終了画面もさらに上に */
+    #endScreen {
+        padding-top: 5vh; /* ★さらに上に */
+    }
+    
+    .end-content {
+        margin-top: 5px; /* ★さらに上に */
+        padding: 40px 20px; /* ★パディング調整 */
+    }
+    
+    .end-content h2 {
+        font-size: 3rem; /* ★少し小さく */
+    }
+    
+    /* ルール画面もさらに上に */
+    #rulesScreen {
+        padding-top: 5vh; /* ★さらに上に */
+    }
+    
+    .rules-content {
+        margin-top: 5px; /* ★さらに上に */
+        padding: 30px 20px; /* ★パディング調整 */
+    }
+    
+    .game-info {
+        gap: 15px;
+        padding: 12px 15px;
+    }
+    
+    #timer {
+        font-size: 14px;
+        padding: 8px 16px;
+        min-width: 90px;
+    }
+    
+    .small-button {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
