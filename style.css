@@ -32,8 +32,6 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
-    justify-content: center; /* ★中央配置に戻す */
-    padding-top: 0; /* ★パディングを削除 */
 }
 
 /* 背景装飾 */
@@ -224,388 +222,47 @@ body {
     }
 }
 
-.menu-content {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    max-width: 400px;
-    width: 90%;
+/* 基本画面のレイアウト調整 */
+.screen {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
 }
 
-.menu-content h2 {
-    color: #fff;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-#levelSelect {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 18px; /* ★少し大きく */
-    margin-bottom: 20px;
-    backdrop-filter: blur(5px);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center; /* ★中央揃え */
-    appearance: none; /* ★デフォルトの矢印を削除 */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 20px;
-}
-
-#levelSelect:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(64, 207, 255, 0.5);
-    box-shadow: 0 0 15px rgba(64, 207, 255, 0.3);
-}
-
-#levelSelect:focus {
-    outline: none;
-    border-color: #40CFFF;
-    box-shadow: 0 0 20px rgba(64, 207, 255, 0.5);
-}
-
-#levelSelect option {
-    background: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-}
-
-#levelSelect option:hover {
-    background: rgba(64, 207, 255, 0.3);
-}
-
-.settings {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.settings label {
-    color: #fff;
-    font-size: 16px;
+.screen.active {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
+    justify-content: center; /* ★デスクトップは中央のまま */
 }
 
-.settings input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: #40CFFF;
+/* スマホでのみ上寄せ */
+@media (max-width: 768px) {
+    .screen.active {
+        justify-content: flex-start; /* ★スマホは上寄せ */
+    }
 }
 
-.button-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.menu-button {
-    background: linear-gradient(45deg, #40CFFF, #5555FF);
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(64, 207, 255, 0.4);
-    transition: all 0.3s ease;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+/* メインメニュー */
+#mainMenu {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
 }
 
-.menu-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-}
-
-.menu-button:hover::before {
-    left: 100%;
-}
-
-.menu-button:hover {
-    background: linear-gradient(45deg, #5555FF, #40CFFF);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(64, 207, 255, 0.6);
-}
-
-.menu-button:active {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(64, 207, 255, 0.4);
-}
-
-.copyright-notice {
-    margin-top: 30px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.4;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-}
-
-.copyright-notice p {
-    margin: 3px 0;
+/* 終了画面 */
+#endScreen {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 /* ルール画面 */
-.rules-content {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    max-width: 600px;
-    width: 90%;
-    color: #fff;
-    text-align: center;
-}
-
-.rules-text h2 {
-    color: #40CFFF;
-    margin-bottom: 20px;
-    font-size: 2rem;
-}
-
-.rules-text p {
-    margin: 15px 0;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* ゲーム画面 */
-#gameScreen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    position: relative;
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
-    min-height: 100vh;
-}
-
-#gameScreen.active {
-    display: flex;
-}
-
-.game-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(52, 73, 94, 0.8));
-    padding: 20px 30px;
-    border-radius: 15px;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 4px rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 400px;
-}
-
-#timer {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 12px 24px;
-    border-radius: 25px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 
-        0 4px 15px rgba(52, 152, 219, 0.3),
-        inset 0 1px 3px rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    min-width: 120px;
-    text-align: center;
+#rulesScreen {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
-}
-
-#timer::before {
-    content: '⏰';
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    animation: tick 1s infinite;
-}
-
-@keyframes tick {
-    0%, 50% { transform: translateY(-50%) scale(1); }
-    25% { transform: translateY(-50%) scale(1.1); }
-}
-
-.small-button {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 
-        0 4px 15px rgba(231, 76, 60, 0.3),
-        inset 0 1px 3px rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.small-button::before {
-    content: '🚪';
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-}
-
-.small-button:hover {
-    background: linear-gradient(135deg, #c0392b, #a93226);
-    transform: translateY(-2px);
-    box-shadow: 
-        0 6px 20px rgba(231, 76, 60, 0.4),
-        inset 0 1px 3px rgba(255, 255, 255, 0.2);
-}
-
-.small-button:active {
-    transform: translateY(0);
-    box-shadow: 
-        0 2px 8px rgba(231, 76, 60, 0.3),
-        inset 0 1px 3px rgba(255, 255, 255, 0.2);
-}
-
-#gameCanvas {
-    border: 4px solid #34495e;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 50%, #bdc3c7 100%);
-    box-shadow: 
-        0 15px 40px rgba(0, 0, 0, 0.2),
-        inset 0 2px 8px rgba(255, 255, 255, 0.6),
-        inset 0 -2px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-#gameCanvas::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-    border-radius: 16px;
-}
-
-/* ゲーム画面用の著作権表示 */
-.game-copyright {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.4;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 8px 12px;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.game-copyright p {
-    margin: 2px 0;
-}
-
-/* スマホ対応 */
-@media (max-width: 768px) {
-    .game-info {
-        min-width: auto;
-        width: 90%;
-        gap: 20px;
-        padding: 15px 20px;
-    }
-    
-    #timer {
-        font-size: 16px;
-        padding: 10px 20px;
-        min-width: 100px;
-    }
-    
-    #timer::before {
-        font-size: 14px;
-        left: 6px;
-    }
-    
-    .small-button {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
-    
-    .small-button::before {
-        font-size: 14px;
-        left: 6px;
-    }
-    
-    #gameCanvas {
-        border-width: 3px;
-        border-radius: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .game-info {
-        gap: 15px;
-        padding: 12px 15px;
-    }
-    
-    #timer {
-        font-size: 14px;
-        padding: 8px 16px;
-        min-width: 90px;
-    }
-    
-    .small-button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
 }
 
 /* ...existing code... */
