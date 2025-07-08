@@ -488,7 +488,7 @@ class DOGame {
         this.timerInterval = setInterval(() => {
             const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
             this.elements.timer.textContent = `Time: ${elapsed}s`;
-        }, 100);
+        }, 1000); // 更新間隔を500msに変更
     }
     
     stopTimer() { if (this.timerInterval) clearInterval(this.timerInterval); }
