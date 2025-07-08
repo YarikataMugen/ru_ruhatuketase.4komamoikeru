@@ -169,10 +169,10 @@ class DOGame {
     
     drawGame() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         // ★豪華なゲーム背景
         this.ctx.save();
-        
+
         // ベースのグラデーション
         const baseGradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
         baseGradient.addColorStop(0, '#f8f9fa');
@@ -181,7 +181,7 @@ class DOGame {
         baseGradient.addColorStop(1, '#ced4da');
         this.ctx.fillStyle = baseGradient;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         // 放射状のグラデーション（中央の光）
         const centerGradient = this.ctx.createRadialGradient(
             this.centerX, this.centerY, 0,
@@ -192,22 +192,9 @@ class DOGame {
         centerGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.ctx.fillStyle = centerGradient;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        
-        // 微細なドット模様
-        this.ctx.globalAlpha = 0.05;
-        for (let i = 0; i < 100; i++) {
-            this.ctx.beginPath();
-            this.ctx.arc(
-                Math.random() * this.canvas.width,
-                Math.random() * this.canvas.height,
-                Math.random() * 3 + 1,
-                0, Math.PI * 2
-            );
-            this.ctx.fillStyle = Math.random() > 0.5 ? '#40CFFF' : '#5555FF';
-            this.ctx.fill();
-        }
-        this.ctx.globalAlpha = 1;
-        
+
+        // 微細なドット模様（削除済み）
+
         // 装飾的な円
         this.ctx.globalAlpha = 0.1;
         for (let i = 0; i < 8; i++) {
@@ -215,7 +202,7 @@ class DOGame {
             const radius = this.boardSize * this.tileSize * 0.8;
             const x = this.centerX + Math.cos(angle) * radius;
             const y = this.centerY + Math.sin(angle) * radius;
-            
+
             const circleGradient = this.ctx.createRadialGradient(x, y, 0, x, y, 50);
             circleGradient.addColorStop(0, '#40CFFF');
             circleGradient.addColorStop(1, 'rgba(64, 207, 255, 0)');
@@ -225,7 +212,7 @@ class DOGame {
             this.ctx.fill();
         }
         this.ctx.globalAlpha = 1;
-        
+
         // 波紋効果
         this.ctx.globalAlpha = 0.08;
         for (let i = 0; i < 5; i++) {
@@ -237,7 +224,7 @@ class DOGame {
             this.ctx.stroke();
         }
         this.ctx.globalAlpha = 1;
-        
+
         // 四隅の装飾
         this.ctx.globalAlpha = 0.15;
         const corners = [
@@ -257,9 +244,9 @@ class DOGame {
             this.ctx.fill();
         });
         this.ctx.globalAlpha = 1;
-        
+
         this.ctx.restore();
-        
+
         this.drawGrid();
         this.tiles.forEach(tile => {
             if (this.heldTile && tile.x === this.heldTile.x && tile.y === this.heldTile.y) return;
@@ -273,7 +260,7 @@ class DOGame {
                 isHeld: true
             }, true);
         }
-        
+
         // ★著作権表示
         this.ctx.save();
         this.ctx.font = "11px Arial";
@@ -283,7 +270,7 @@ class DOGame {
         this.ctx.fillText("作成日: 2025/7/5", 10, this.canvas.height - 35);
         this.ctx.fillText("クリエイター: Yaminion", 10, this.canvas.height - 20);
         this.ctx.restore();
-        
+
         // ★クリア時の表示（上部に配置）
         if (this.isCleared) {
             this.ctx.save();
@@ -302,12 +289,12 @@ class DOGame {
             const btnX = this.canvas.width - 100;
             const btnY = 80;
             const btnW = 160, btnH = 50;
-            
+
             this.ctx.save();
             const buttonGradient = this.ctx.createLinearGradient(btnX - btnW/2, btnY - btnH/2, btnX + btnW/2, btnY + btnH/2);
             buttonGradient.addColorStop(0, '#40CFFF');
             buttonGradient.addColorStop(1, '#5555FF');
-            
+
             // ★roundRectの代わりに手動で角丸四角形を描画
             this.drawRoundedRect(btnX - btnW / 2, btnY - btnH / 2, btnW, btnH, 15);
             this.ctx.fillStyle = buttonGradient;
