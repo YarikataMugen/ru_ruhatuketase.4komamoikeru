@@ -947,7 +947,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (backToGameButton) {
         backToGameButton.addEventListener('click', () => {
-            window.close();
+            window.location.href = 'index.html'; // メインメニュー画面に戻る
         });
     }
 
