@@ -1848,3 +1848,15 @@ body {
         color: #ffc107 !important;
     }
 }
+
+/* スクロール可能にするためのスタイルを追加 */
+#mapContainer {
+    overflow: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 横スクロールを可能にする */
+body {
+    overflow-x: auto;
+}

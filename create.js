@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // マップサイズ選択用のドロップダウンを追加
+    // PC版とスマホ版両方でマップサイズ選択用のドロップダウンを追加
     const mapSizeSelect = document.createElement('select');
     mapSizeSelect.id = 'mapSizeSelect';
     mapSizeSelect.innerHTML = `
