@@ -92,7 +92,23 @@
         <div class="sidebar">
             <!-- サイドバーの内容はそのまま -->
             <div>
-                <label>サイズ: <input type="number" id="inputSize" min="3" max="15" value="5"></label><br>
+                <label>サイズ: 
+                    <select id="inputSize">
+                        <option value="3">3×3</option>
+                        <option value="4">4×4</option>
+                        <option value="5" selected>5×5</option>
+                        <option value="6">6×6</option>
+                        <option value="7">7×7</option>
+                        <option value="8">8×8</option>
+                        <option value="9">9×9</option>
+                        <option value="10">10×10</option>
+                        <option value="11">11×11</option>
+                        <option value="12">12×12</option>
+                        <option value="13">13×13</option>
+                        <option value="14">14×14</option>
+                        <option value="15">15×15</option>
+                    </select>
+                </label><br>
                 <label>色なし（グレー）: <input type="checkbox" id="inputColorRandom"></label><br>
                 <div class="section-title">保存先選択</div>
                 <label>保存先: 

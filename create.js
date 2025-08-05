@@ -860,32 +860,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // PC版とスマホ版両方でマップサイズ選択用のドロップダウンを追加
-    const mapSizeSelect = document.createElement('select');
-    mapSizeSelect.id = 'mapSizeSelect';
-    mapSizeSelect.innerHTML = `
-        <option value="small">小</option>
-        <option value="medium">中</option>
-        <option value="large">大</option>
-    `;
-
-    // 適切な場所に挿入
-    const mapSizeContainer = document.getElementById('mapSizeContainer');
-    if (mapSizeContainer) {
-        mapSizeContainer.appendChild(mapSizeSelect);
-    }
-
-    // ドロップダウンの変更イベントを設定
-    mapSizeSelect.addEventListener('change', (event) => {
-        const selectedSize = event.target.value;
-        console.log('選択されたマップサイズ:', selectedSize);
-        // 必要に応じてマップサイズを変更するロジックを追加
-    });
-
-
     // イベントリスナー設定
     if (inputSize) {
-        inputSize.addEventListener('input', handleSizeChange);
+        inputSize.addEventListener('change', handleSizeChange);
     }
 
     if (mainMap) {
