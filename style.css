@@ -532,6 +532,8 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
+    /* キャンバスの透過を防ぐ */
+    z-index: 100;
 }
 
 /* 背景装飾 */
@@ -569,6 +571,12 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.2);
     max-width: 90vw;
     width: auto;
+    /* 中央配置を確実にする */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: 0;
+    right: 0;
 }
 
 .game-title {
@@ -636,7 +644,10 @@ body {
         z-index: 1000 !important;
         margin-bottom: 0 !important;
         width: auto !important;
-        max-width: 90vw !important;
+        max-width: calc(100vw - 20px) !important; /* 左右10pxずつの余白 */
+        /* 中央配置を確実にする */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     
     .game-title {
@@ -650,6 +661,16 @@ body {
         margin-top: 100px !important; /* ★タイトルの下に余白を追加 */
         position: relative !important;
         z-index: 500 !important;
+        /* 左右のスペースを統一 */
+        width: calc(100vw - 20px) !important; /* 左右10pxずつの余白 */
+        max-width: 400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        /* パディングを調整 */
+        padding: 25px 20px !important;
+        box-sizing: border-box !important;
     }
     
     /* 終了画面とルール画面 */
@@ -677,6 +698,7 @@ body {
     .title-container {
         top: 5px !important; /* ★さらに小さい画面では5pxに配置 */
         padding: 5px 8px !important; /* ★パディングをさらに縮小 */
+        max-width: calc(100vw - 16px) !important; /* 左右8pxずつの余白 */
     }
 
     .game-title {
@@ -700,6 +722,12 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.2);
     max-width: 400px;
     width: 90%;
+    /* 中央配置を確実にする */
+    margin: 0 auto;
+    position: relative;
+    /* 左右のスペースを統一 */
+    left: 0;
+    right: 0;
 }
 
 .menu-content h2 {
