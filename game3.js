@@ -473,6 +473,11 @@ class DOGame {
             //console.log('通常のレベル', this.selectedLevel, 'でゲームを開始');
             this.boardSize = parseInt(this.selectedLevel) + 3; // レベル0→3、レベル1→4、etc.
             this.generateDiamondMap();
+            
+            // ★通常レベルでは固定配列システムを無効化
+            this.fixedArray = null;
+            this.pieceTypeCleared = {}; // カスタムパズル判定用配列をクリア
+            //console.log('通常レベル: 固定配列システムを無効化');
         }
         
         this.setupCanvas();
@@ -559,9 +564,19 @@ class DOGame {
         this.requiredGroups = puzzleData.requiredGroups || null;
         //console.log('動的クリア条件設定:', this.requiredGroups);
         
-        // クリア条件用配列の初期化
+        // カスタムパズル判定用の配列初期化（クリア判定の識別のみに使用）
         this.pieceTypeCleared = {};
         this.totalPieceTypes = 0;
+        
+        // ★新しい固定配列の初期化（マップと同じサイズ）
+        this.fixedArray = [];
+        for (let y = 0; y < this.boardSize; y++) {
+            this.fixedArray[y] = [];
+            for (let x = 0; x < this.boardSize; x++) {
+                this.fixedArray[y][x] = 0; // 初期状態では全て0
+            }
+        }
+        //console.log('固定配列初期化完了:', this.fixedArray);
         
         // 配置された駒の種類を調べて配列を初期化
         const pieceTypes = new Set();
@@ -573,13 +588,13 @@ class DOGame {
             }
         }
         
-        // 各駒種類を0で初期化
+        // カスタムパズル判定用として各駒種類を記録（値は使用しない）
         pieceTypes.forEach(pieceType => {
-            this.pieceTypeCleared[pieceType] = 0;
+            this.pieceTypeCleared[pieceType] = 0; // 値は無意味、存在チェックのみ
         });
         
         this.totalPieceTypes = pieceTypes.size;
-        //console.log('クリア条件配列初期化:', this.pieceTypeCleared, '駒種類数:', this.totalPieceTypes);
+        //console.log('カスタムパズル判定用配列初期化:', Object.keys(this.pieceTypeCleared), '駒種類数:', this.totalPieceTypes);
         
         //console.log('カスタムパズル読み込み完了 - サイズ:', this.boardSize, '色モード:', this.colorMode, '必要グループ数:', this.requiredGroups);
         
@@ -990,10 +1005,16 @@ class DOGame {
             this.fixTileAt(pair.pos2.x, pair.pos2.y);
             //console.log(`ペア固定: (${pair.pos1.x},${pair.pos1.y}) と (${pair.pos2.x},${pair.pos2.y}) 値:${pair.value}`);
             
-            // ★動的クリア条件用：初期配置で隣接している駒種類をクリア状態にする
-            if (this.pieceTypeCleared && this.pieceTypeCleared.hasOwnProperty(pair.value)) {
-                //console.log(`初期配置で駒種類 ${pair.value} がクリア状態になりました`);
-                this.pieceTypeCleared[pair.value] = 1;
+            // ★カスタムパズルの場合、初期配置の固定駒も固定配列に1を設定
+            if (this.fixedArray) {
+                if (this.fixedArray[pair.pos1.y]) {
+                    this.fixedArray[pair.pos1.y][pair.pos1.x] = 1;
+                    //console.log(`初期固定配列: 位置(${pair.pos1.x},${pair.pos1.y})に1を設定`);
+                }
+                if (this.fixedArray[pair.pos2.y]) {
+                    this.fixedArray[pair.pos2.y][pair.pos2.x] = 1;
+                    //console.log(`初期固定配列: 位置(${pair.pos2.x},${pair.pos2.y})に1を設定`);
+                }
             }
         });
         
@@ -1259,33 +1280,58 @@ class DOGame {
                     this.mouseRuRu[y][x] = 1; 
                     this.sumMouseRuRu++; 
                     //console.log(`位置(${x},${y})をmouseRuRu=1に設定, 合計:${this.sumMouseRuRu}`);
+                    
+                    // ★カスタムパズルの場合、固定配列に1を設定
+                    if (this.fixedArray && this.fixedArray[y]) {
+                        this.fixedArray[y][x] = 1;
+                        //console.log(`固定配列: 位置(${x},${y})に1を設定`);
+                    }
                 }
                 if (!adjacentTile?.isFixed && this.mouseRuRu[ny][nx] === 0) { 
                     this.mouseRuRu[ny][nx] = 1; 
                     this.sumMouseRuRu++; 
                     //console.log(`位置(${nx},${ny})をmouseRuRu=1に設定, 合計:${this.sumMouseRuRu}`);
+                    
+                    // ★カスタムパズルの場合、固定配列に1を設定
+                    if (this.fixedArray && this.fixedArray[ny]) {
+                        this.fixedArray[ny][nx] = 1;
+                        //console.log(`固定配列: 位置(${nx},${ny})に1を設定`);
+                    }
                 }
             }
         }
         
-        // ★動的クリア条件用：駒種類のクリア状況を更新（カスタムパズルのみ）
-        if (this.pieceTypeCleared && Object.keys(this.pieceTypeCleared).length > 0 && hasAdjacent) {
-            //console.log(`駒種類 ${currentValue} が隣接しました`);
-            this.pieceTypeCleared[currentValue] = 1;
-            //console.log('現在のクリア状況:', this.pieceTypeCleared);
-        }
+        // ★動的クリア条件用の古いシステムは削除
+        // 新しい 固定配列システム を使用するため不要
     }
     
     checkWin() {
-        // ★カスタムパズル（動的クリア条件）の場合
+        // ★カスタムパズル（新しい固定駒システム）の場合
         if (this.pieceTypeCleared && Object.keys(this.pieceTypeCleared).length > 0) {
-            //console.log('カスタムパズル - 動的クリア条件でチェック');
-            //console.log('クリア状況:', this.pieceTypeCleared);
+            //console.log('カスタムパズル - 固定駒システムでチェック');
             
-            // 全ての駒種類がクリア状態（1）になったかチェック
-            const allCleared = Object.values(this.pieceTypeCleared).every(cleared => cleared === 1);
-            //console.log('全種類クリア済み:', allCleared);
-            return allCleared;
+            // 固定配列の1の合計を計算
+            let fixedCount = 0;
+            for (let y = 0; y < this.boardSize; y++) {
+                for (let x = 0; x < this.boardSize; x++) {
+                    if (this.fixedArray && this.fixedArray[y] && this.fixedArray[y][x] === 1) {
+                        fixedCount++;
+                    }
+                }
+            }
+            
+            // 駒の総数を計算
+            let totalPieces = 0;
+            for (let y = 0; y < this.boardSize; y++) {
+                for (let x = 0; x < this.boardSize; x++) {
+                    if (this.mapData[y][x] < 999) {
+                        totalPieces++;
+                    }
+                }
+            }
+            
+            //console.log(`固定駒数: ${fixedCount}, 総駒数: ${totalPieces}`);
+            return fixedCount === totalPieces;
         }
         
         // ★通常レベルの場合：mouseRuRuシステムを使用
@@ -1293,7 +1339,7 @@ class DOGame {
         //console.log('mouseRuRu配列の状態:', this.mouseRuRu);
         return this.sumMouseRuRu === this.countPiece;
     }
-    
+
     startTimer() {
         if (!this.timerEnabled) {
             this.updateTimerDisplay();

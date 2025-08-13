@@ -1215,13 +1215,14 @@ body {
 
 
     .piece {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         width: 36px;
         height: 36px;
         border: 1px solid #888;
         margin: 4px;
         text-align: center;
-        line-height: 36px;
         background: #eee;
         cursor: pointer;
         transition: background 0.3s, box-shadow 0.3s;
