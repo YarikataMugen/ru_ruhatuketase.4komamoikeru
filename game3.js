@@ -260,14 +260,57 @@ class DOGame {
             }
         });
         this.canvas.addEventListener('click', (e) => this.onCanvasClick(e));
+        
+        // スマホでのタッチ操作を改善（スクロール・ズーム対応）
+        let touchStartTime = 0;
+        let touchStartPos = null;
+        let touchMoved = false;
+        
         this.canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('click', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            this.canvas.dispatchEvent(mouseEvent);
+            touchStartTime = Date.now();
+            touchStartPos = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY
+            };
+            touchMoved = false;
+            
+            // 複数指の場合（ピンチズーム）は何もしない
+            if (e.touches.length > 1) {
+                return;
+            }
+        });
+        
+        this.canvas.addEventListener('touchmove', (e) => {
+            if (!touchStartPos) return;
+            
+            const currentTouch = e.touches[0];
+            const deltaX = Math.abs(currentTouch.clientX - touchStartPos.x);
+            const deltaY = Math.abs(currentTouch.clientY - touchStartPos.y);
+            
+            // 一定以上動いた場合はスクロールと判定
+            if (deltaX > 10 || deltaY > 10) {
+                touchMoved = true;
+            }
+        });
+        
+        this.canvas.addEventListener('touchend', (e) => {
+            const touchDuration = Date.now() - touchStartTime;
+            
+            // 短時間のタップでかつ移動が少ない場合のみゲーム操作として処理
+            if (!touchMoved && touchDuration < 500 && touchStartPos) {
+                e.preventDefault(); // この場合のみpreventDefault
+                
+                const mouseEvent = new MouseEvent('click', {
+                    clientX: touchStartPos.x,
+                    clientY: touchStartPos.y
+                });
+                this.canvas.dispatchEvent(mouseEvent);
+            }
+            
+            // リセット
+            touchStartTime = 0;
+            touchStartPos = null;
+            touchMoved = false;
         });
         this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
 

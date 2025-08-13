@@ -1860,17 +1860,19 @@ body {
 body {
     overflow-x: auto;
     /* スマホでのピンチズーム対応を強化 */
-    touch-action: manipulation;
+    touch-action: pan-x pan-y pinch-zoom;
 }
 
 /* ゲームキャンバスのスマホ対応を強化 */
 #gameCanvas {
-    /* タッチ操作の最適化 */
-    touch-action: manipulation;
+    /* タッチ操作の最適化：パンとズームを許可、ダブルタップズームも許可 */
+    touch-action: pan-x pan-y pinch-zoom;
     /* 拡大時のスムージング */
     image-rendering: auto;
     /* 最大幅を画面幅に制限しない（拡大時に横スクロール可能） */
     max-width: none !important;
+    /* タッチ時のハイライトを無効化 */
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* スマホでの拡大対応 */
@@ -1885,6 +1887,8 @@ body {
         max-width: none;
         /* スムーズなスクロール */
         -webkit-overflow-scrolling: touch;
+        /* タッチアクションを許可 */
+        touch-action: pan-x pan-y pinch-zoom;
     }
     
     /* キャンバス周りのコンテナ調整 */
