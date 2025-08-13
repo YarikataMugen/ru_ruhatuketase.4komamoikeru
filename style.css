@@ -597,9 +597,13 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: glow 2s ease-in-out infinite alternate, shimmer 3s ease-in-out infinite;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* 省略表示を解除してタイトル全体を表示 */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    /* 改行を許可 */
+    word-break: keep-all;
+    line-height: 1.1;
 }
 
 @keyframes glow {
@@ -636,7 +640,7 @@ body {
         top: 10px !important; /* ★タイトルを画面上部から10pxに配置（約1cm） */
         left: 50% !important;
         transform: translateX(-50%) !important;
-        padding: 6px 10px !important; /* ★パディングを調整 */
+        padding: 8px 12px !important; /* パディングを少し増やす */
         background: rgba(0, 0, 0, 0.3) !important;
         backdrop-filter: blur(10px) !important;
         border-radius: 10px !important;
@@ -644,17 +648,25 @@ body {
         z-index: 1000 !important;
         margin-bottom: 0 !important;
         width: auto !important;
-        max-width: calc(100vw - 20px) !important; /* 左右10pxずつの余白 */
+        max-width: calc(100vw - 16px) !important; /* 余白を少し縮小 */
         /* 中央配置を確実にする */
         margin-left: 0 !important;
         margin-right: 0 !important;
+        /* タイトル全体が収まるように */
+        min-width: 280px !important;
     }
     
     .game-title {
-        font-size: 2rem !important; /* ★2.2remから2remに変更 */
-        letter-spacing: 1px !important; /* ★2pxから1pxに変更 */
+        font-size: 1.8rem !important; /* フォントサイズを少し縮小 */
+        letter-spacing: 0.5px !important; /* 文字間隔を縮小 */
         text-align: center !important;
         margin: 0 !important;
+        /* 省略表示を解除 */
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        word-break: keep-all !important;
+        line-height: 1.1 !important;
     }
     
     .menu-content {
@@ -697,12 +709,20 @@ body {
 @media (max-width: 480px) {
     .title-container {
         top: 5px !important; /* ★さらに小さい画面では5pxに配置 */
-        padding: 5px 8px !important; /* ★パディングをさらに縮小 */
-        max-width: calc(100vw - 16px) !important; /* 左右8pxずつの余白 */
+        padding: 6px 10px !important; /* パディング調整 */
+        max-width: calc(100vw - 12px) !important; /* 左右6pxずつの余白 */
+        min-width: 260px !important; /* 最小幅を調整 */
     }
 
     .game-title {
-        font-size: 1.8rem !important; /* ★フォントサイズを調整 */
+        font-size: 1.6rem !important; /* さらにフォントサイズ縮小 */
+        letter-spacing: 0.3px !important; /* 文字間隔をさらに縮小 */
+        /* 省略表示を解除 */
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        word-break: keep-all !important;
+        line-height: 1.1 !important;
     }
 
     .menu-content {
