@@ -1859,4 +1859,79 @@ body {
 /* 横スクロールを可能にする */
 body {
     overflow-x: auto;
+    /* スマホでのピンチズーム対応を強化 */
+    touch-action: manipulation;
+}
+
+/* ゲームキャンバスのスマホ対応を強化 */
+#gameCanvas {
+    /* タッチ操作の最適化 */
+    touch-action: manipulation;
+    /* 拡大時のスムージング */
+    image-rendering: auto;
+    /* 最大幅を画面幅に制限しない（拡大時に横スクロール可能） */
+    max-width: none !important;
+}
+
+/* スマホでの拡大対応 */
+@media (max-width: 768px) {
+    /* メタビューポートでuser-scalable=yesが設定されているため、拡大可能 */
+    
+    /* ゲーム画面全体のスクロール対応 */
+    #gameScreen {
+        overflow: auto !important;
+        /* 最小幅を確保して横スクロールを可能にする */
+        min-width: 100vw;
+        max-width: none;
+        /* スムーズなスクロール */
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* キャンバス周りのコンテナ調整 */
+    #gameScreen.active {
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        padding: 10px;
+        /* 拡大時のコンテンツ配置 */
+        display: block !important;
+    }
+    
+    /* ゲーム情報バーも横スクロールに対応 */
+    .game-info {
+        min-width: 400px !important;
+        max-width: none !important;
+        flex-shrink: 0;
+        /* 固定位置から相対位置に変更 */
+        position: relative !important;
+        margin-bottom: 10px;
+    }
+    
+    /* キャンバス自体の最小サイズを保証 */
+    #gameCanvas {
+        min-width: 400px !important;
+        flex-shrink: 0 !important;
+        /* 拡大時の品質維持 */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        /* 中央配置を解除 */
+        display: block !important;
+        margin: 0 !important;
+    }
+    
+    /* ゲームキャンバスの親コンテナ */
+    #gameScreen .game-content {
+        width: fit-content;
+        min-width: 100%;
+    }
+}
+
+/* 超小型デバイスでの追加調整 */
+@media (max-width: 480px) {
+    #gameCanvas {
+        min-width: 350px !important;
+    }
+    
+    .game-info {
+        min-width: 350px !important;
+    }
 }
